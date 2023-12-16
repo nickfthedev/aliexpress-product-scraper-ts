@@ -1,6 +1,7 @@
 # Aliexpress Product Scraper
 
-[![Node.js Package](https://github.com/sudheer-ranga/aliexpress-product-scraper/actions/workflows/npm-publish.yml/badge.svg?branch=master)](https://github.com/sudheer-ranga/aliexpress-product-scraper/actions/workflows/npm-publish.yml)
+Fork of: https://github.com/sudheer-ranga/aliexpress-product-scraper/
+
 Aliexpress Product Scraper scrapes product information and returns the response in json format including:
 
 - Description
@@ -11,15 +12,28 @@ Aliexpress Product Scraper scrapes product information and returns the response 
 # How to use?
 
 ```
-npm i aliexpress-product-scraper
+npm i aliexpress-product-scraper-ts
 ```
 
 ```
-import scrape from 'aliexpress-product-scraper';
+import scrape from 'aliexpress-product-scraper-ts';
+import { Options, filterReviewsBy } from "aliexpress-product-scraper-ts";
 
-scrape('1005005167379524', options).then(res => {
-  console.log('Product JSON: ', res);
-});
+  const options: Options = {
+    reviewsCount: 20,
+    filterReviewsBy: filterReviewsBy.FiveStar,
+    puppeteerOptions: {
+      headless: "new",
+    },
+  };
+
+  scrape("1005005167379524", options)
+    .then((res) => {
+      console.log("Product JSON: ", res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 ```
 
 Initialiser takes id as a string. It also takes options which are optional. Options are defined as below.
@@ -31,7 +45,7 @@ Options
 ```
 {
   reviewsCount: 20,
-  filterReviewsBy: 'all' | 1 | 2 | 3 | 4 | 5,
+  filterReviewsBy: filterReviewsBy.FiveStar | filterReviewsBy.FourStar | .. // Defaults to all
   puppeteerOptions: {},
 }
 ```

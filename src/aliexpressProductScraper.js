@@ -24,7 +24,8 @@ const AliexpressProductScraper = async (
     const page = await browser.newPage();
 
     /** Scrape the aliexpress product page for details */
-    await page.goto(`https://www.aliexpress.com/item/${id}.html`);
+    /** use .us for english response */
+    await page.goto(`https://www.aliexpress.us/item/${id}.html`);
     const aliExpressData = await page.evaluate(() => runParams);
 
     const data = aliExpressData?.data;
