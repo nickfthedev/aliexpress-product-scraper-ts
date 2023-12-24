@@ -1,5 +1,5 @@
 declare module 'aliexpress-product-scraper-ts' {
-    export default function scrape(id: string, options?: Options): Promise<Product>;
+    export function scrape(id: string, options?: Options): Promise<Product>;
 
     enum filterReviewsBy {
         "OneStar" = 1,
