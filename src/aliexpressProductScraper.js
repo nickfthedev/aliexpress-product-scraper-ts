@@ -5,10 +5,10 @@ import { get as GetVariants } from "./variants.js";
 import { get as GetReviews } from "./reviews.js";
 import { get as GetShippingDetails } from "./shipping.js";
 
-const AliexpressProductScraper = async (
+async function scrape (
   id,
   { reviewsCount = 20, filterReviewsBy = "all", puppeteerOptions = {} } = {}
-) => {
+) {
   if (!id) {
     throw new Error("Please provide a valid product id");
   }
@@ -122,4 +122,4 @@ const AliexpressProductScraper = async (
   }
 };
 
-export default AliexpressProductScraper;
+export { scrape }; 

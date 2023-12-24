@@ -1,3 +1,3 @@
 
-import AliexpressProductScraper from "./src/aliexpressProductScraper.js";
-export default AliexpressProductScraper;
+import { scrape } from "./src/aliexpressProductScraper.js";
+export { scrape };
