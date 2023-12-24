@@ -1,10 +1,13 @@
 {
   "name": "aliexpress-product-scraper-ts",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Get Aliexpress product details as a json reponse including feedbacks, variants, description, images, etc.,",
-  "main": "dist/cjs/index.cjs", 
-  "module": "dist/esm/index.js", 
-  "type": "module", 
+  "main": "dist/cjs/index.cjs",
+  "type": "module",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.cjs"
+  },
   "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
