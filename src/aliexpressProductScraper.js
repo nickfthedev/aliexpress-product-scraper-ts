@@ -122,4 +122,4 @@ async function scrape (
   }
 };
 
-export { scrape }; 
+module.exports = { scrape };
