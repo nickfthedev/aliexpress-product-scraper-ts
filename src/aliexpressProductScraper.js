@@ -1,9 +1,9 @@
-import puppeteer from "puppeteer";
-import * as cheerio from "cheerio";
+const puppeteer = require("puppeteer");
+const cheerio = require("cheerio");
 
-import { get as GetVariants } from "./variants.js";
-import { get as GetReviews } from "./reviews.js";
-import { get as GetShippingDetails } from "./shipping.js";
+const GetReviews = require("./reviews");
+const GetShippingDetails = require("./shipping");
+const GetVariants = require("./variants");
 
 async function scrape (
   id,

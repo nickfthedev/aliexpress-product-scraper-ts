@@ -1,18 +1,17 @@
-import fetch from "node-fetch";
-import { faker } from "@faker-js/faker";
+const { faker } = require('@faker-js/faker');
 
 const getReview = (review) => {
-  const gender = review.buyerGender === "M" ? "male" : "female";
-  const displayName = faker.person.fullName({
-    sex: gender,
-  });
+  const gender = review.buyerGender === 'M' ? 'male' : 'female';
+  // Note: Adjusting the faker method to the correct usage
+  const displayName = faker.name.findName('', '', gender === 'male' ? 0 : 1);
 
   const data = {
     anonymous: review.anonymous,
     name: review.buyerName || displayName,
     displayName,
     gender,
-    country: review.buyerCountry || faker.location.countryCode("alpha-2"),
+    // Note: Adjusting the faker method to the correct usage
+    country: review.buyerCountry || faker.address.countryCode(),
     rating: review?.buyerEval ? review.buyerEval / 20 : 5,
     info: review.skuInfo,
     date: review.evalDate,
@@ -24,34 +23,29 @@ const getReview = (review) => {
   return data;
 };
 
-const get = async ({ productId, total, limit, filterReviewsBy = "all" }) => {
+// Using dynamic import for node-fetch
+async function fetchWithDynamicImport(url) {
+  const { default: fetch } = await import('node-fetch');
+  return fetch(url);
+}
+
+const get = async ({ productId, total, limit, filterReviewsBy = 'all' }) => {
   let allReviews = [];
   const COUNT_PER_PAGE = 20;
 
-  // if reviews limit requested is less than total reviews, then limit it to total reviews
-  let count = limit;
-  if (limit >= total) {
-    count = total;
-  }
-
+  let count = limit >= total ? total : limit;
   let totalPages = Math.ceil(count / COUNT_PER_PAGE);
-  if (totalPages >= 5) {
-    totalPages = 5;
-  }
+  totalPages = totalPages > 5 ? 5 : totalPages;
 
   for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
     const reviewUrl = `https://feedback.aliexpress.com/pc/searchEvaluation.do?productId=${productId}&page=${currentPage}&pageSize=${COUNT_PER_PAGE}&filter=${filterReviewsBy}`;
-    const review = await fetch(reviewUrl);
-    const reviewJson = await review.json();
+    const reviewResponse = await fetchWithDynamicImport(reviewUrl);
+    const reviewJson = await reviewResponse.json();
 
     const reviews = reviewJson?.data?.evaViewList || [];
 
-    if (!reviews) {
-      return allReviews;
-    }
-
-    reviews.forEach((_review) => {
-      const data = getReview(_review);
+    reviews.forEach((review) => {
+      const data = getReview(review);
       allReviews.push(data);
     });
   }
@@ -59,4 +53,4 @@ const get = async ({ productId, total, limit, filterReviewsBy = "all" }) => {
   return allReviews;
 };
 
-export { get };
+module.exports = { get };
