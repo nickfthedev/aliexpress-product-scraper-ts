@@ -1,4 +1,4 @@
-const getShippingData = (shippingData) => {
+function GetShippingDetails  (shippingData)  {
   const shippingOptions = shippingData?.map((shippingOption) => {
     const {
       deliveryProviderName,
@@ -54,4 +54,4 @@ const getShippingData = (shippingData) => {
   return shippingOptions;
 };
 
-module.exports.default = getShippingData;
+module.exports = GetShippingDetails;

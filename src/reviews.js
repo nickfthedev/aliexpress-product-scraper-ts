@@ -1,9 +1,9 @@
 const { faker } = require('@faker-js/faker');
 
-const getReview = (review) => {
+function getReview  (review)  {
   const gender = review.buyerGender === 'M' ? 'male' : 'female';
   // Note: Adjusting the faker method to the correct usage
-  const displayName = faker.name.findName('', '', gender === 'male' ? 0 : 1);
+  const displayName = faker.person.fullName()
 
   const data = {
     anonymous: review.anonymous,
@@ -29,7 +29,7 @@ async function fetchWithDynamicImport(url) {
   return fetch(url);
 }
 
-const get = async ({ productId, total, limit, filterReviewsBy = 'all' }) => {
+async function GetReviews ({ productId, total, limit, filterReviewsBy = 'all' }) {
   let allReviews = [];
   const COUNT_PER_PAGE = 20;
 
@@ -53,4 +53,4 @@ const get = async ({ productId, total, limit, filterReviewsBy = 'all' }) => {
   return allReviews;
 };
 
-module.exports = { get };
+module.exports = GetReviews;

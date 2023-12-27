@@ -1,4 +1,4 @@
-const get = ({ priceLists = [], optionsLists = [] }) => {
+function GetVariants  ({ priceLists = [], optionsLists = [] }) {
   priceLists = priceLists || [];
   optionsLists = optionsLists || [];
 
@@ -35,4 +35,4 @@ const get = ({ priceLists = [], optionsLists = [] }) => {
   };
 };
 
-module.exports.default = get;
+module.exports = GetVariants;
