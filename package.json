@@ -1,6 +1,6 @@
 {
   "name": "aliexpress-product-scraper-ts",
-  "version": "2.0.23",
+  "version": "2.0.24",
   "description": "Get Aliexpress product details as a json reponse including feedbacks, variants, description, images, etc.,",
   "main": "index.cjs",
   "types": "index.d.ts",

@@ -5,9 +5,9 @@ const GetReviews = require("./reviews");
 const GetShippingDetails = require("./shipping");
 const GetVariants = require("./variants");
 
-async function scrape (
+async function scrape(
   id,
-  { reviewsCount = 20, filterReviewsBy = "all", puppeteerOptions = {} } = {}
+  { reviewsCount = 20, filterReviewsBy = "all", puppeteerOptions = {} } = {},
 ) {
   if (!id) {
     throw new Error("Please provide a valid product id");
@@ -34,7 +34,7 @@ async function scrape (
     }
 
     const shipping = GetShippingDetails(
-      data?.webGeneralFreightCalculateComponent?.originalLayoutResultList || []
+      data?.webGeneralFreightCalculateComponent?.originalLayoutResultList || [],
     );
 
     /** Scrape the description page for the product using the description url */
@@ -51,7 +51,7 @@ async function scrape (
     const reviewsPromise = GetReviews({
       productId: id,
       limit: REVIEWS_COUNT,
-      total: data.feedbackComponent.totalValidNum,
+      total: data?.feedbackComponent?.totalValidNum ?? 0, // Fallback to 0 if undefined
       filterReviewsBy,
     });
 
@@ -120,6 +120,6 @@ async function scrape (
     }
     throw error;
   }
-};
+}
 
 module.exports = { scrape };
