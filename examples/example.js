@@ -1,6 +1,7 @@
-import scrape from "./../index.js";
+// import scrape from "../src/index.cjs";
+const { scrape } = require("../index.cjs");
 
-scrape("1005005167379524", {
+scrape("1005006437082310", {
   reviewsCount: 20,
   rating: 2,
 })
