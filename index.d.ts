@@ -8,7 +8,7 @@ declare module 'aliexpress-product-scraper-ts' {
         "FourStar" = 4,
         "FiveStar" = 5,
     }
-    
+
     type Options = {
         reviewsCount?: number;
         filterReviewsBy?: filterReviewsBy
@@ -40,9 +40,9 @@ declare module 'aliexpress-product-scraper-ts' {
             averageStar: number;
             totalStartCount: number;
             fiveStarCount: number;
-            fourStarCount: number;  
-            threeStarCount: number; 
-            twoStarCount: number;   
+            fourStarCount: number;
+            threeStarCount: number;
+            twoStarCount: number;
             oneStarCount: number;
         };
         images: string[];
@@ -62,33 +62,34 @@ declare module 'aliexpress-product-scraper-ts' {
         variants: {
             options: [
                 {
-                id: number;
-                name: string;
-                values: [{
                     id: number;
                     name: string;
-                    displayName: string;
-                    image: string;    
-                }]
+                    values: [{
+                        id: number;
+                        name: string;
+                        displayName: string;
+                        image: string;
+                    }]
                 }
             ]
+
+            prices: [
+                {
+                    skuId: number;
+                    optionValueIds: number[];
+                    availableQuantity: number;
+                    originalPrice: {
+                        currency: string;
+                        formatedAmount: string;
+                        value: number;
+                    }
+                    salePrice: {
+                        currency: string;
+                        formatedAmount: string;
+                        value: number;
+                    }
+                }];
         }
-        prices : [
-            {
-            skuId: number;
-            optionValueIds: number[];
-            availableQuantity: number;
-            originalPrice: {
-                currency: string;
-                formatedAmount: string;
-                value: number;
-            }
-            salePrice: {
-                currency: string;
-                formatedAmount: string;
-                value: number;
-            }
-        }];
         specs: [
             {
                 attrValue: string;
@@ -107,12 +108,12 @@ declare module 'aliexpress-product-scraper-ts' {
             multiCurrency: boolean;
         }
         originalPrice: {
-            min : {
+            min: {
                 currency: string;
                 formatedAmount: string;
                 value: number;
             }
-            max : {
+            max: {
                 currency: string;
                 formatedAmount: string;
                 value: number;
@@ -153,8 +154,8 @@ declare module 'aliexpress-product-scraper-ts' {
             }
         ]
     };
-    
 
-  }
+
+}
 
 
